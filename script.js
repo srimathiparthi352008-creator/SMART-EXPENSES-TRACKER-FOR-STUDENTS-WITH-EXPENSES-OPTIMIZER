@@ -1,4 +1,4 @@
-let expenses = [];
+let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 
 function addExpense() {
     const expense = prompt("Enter expense name:");
@@ -20,12 +20,16 @@ function addExpense() {
         return;
     }
 
-    expenses.push({
-        name: expense,
+    const newExpense = {
+        name: expense.trim(),
         amount: Number(amount),
-        category: category,
+        category: category.trim(),
         date: new Date().toLocaleDateString()
-    });
+    };
+
+    expenses.push(newExpense);
+
+    localStorage.setItem("expenses", JSON.stringify(expenses));
 
     displayExpenses();
 }
@@ -33,7 +37,16 @@ function addExpense() {
 function displayExpenses() {
     const expenseList = document.getElementById("expenseList");
 
+    if (!expenseList) {
+        return;
+    }
+
     expenseList.innerHTML = "";
+
+    if (expenses.length === 0) {
+        expenseList.innerHTML = "<p>No expenses added yet.</p>";
+        return;
+    }
 
     expenses.forEach(function(expense) {
         const item = document.createElement("div");
@@ -48,3 +61,5 @@ function displayExpenses() {
         expenseList.appendChild(item);
     });
 }
+
+displayExpenses();
