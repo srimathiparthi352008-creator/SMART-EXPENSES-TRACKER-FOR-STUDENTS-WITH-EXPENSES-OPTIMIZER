@@ -12,7 +12,7 @@ let expenses = [
         date: "12/08/2026"
     }
 ];
-];
+
 
 let monthlyBudget = 0;
 function updateTotal() {
