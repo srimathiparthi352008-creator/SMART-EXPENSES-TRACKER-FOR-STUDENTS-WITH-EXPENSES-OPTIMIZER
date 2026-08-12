@@ -20,8 +20,7 @@ function updateTotal() {
         total += Number(expense.amount);
     });
 
-    document.getElementById("total-expenses").textContent =
-        "Total Expenses: ₹" + total;
+    document.getElementById("total-expenses").textContent = total;
 }
 
 function displayExpenses() {
@@ -37,8 +36,46 @@ function displayExpenses() {
                 <p>Category: ${expense.category}</p>
                 <p>Date: ${expense.date}</p>
             </div>
+            <hr>
         `;
     });
+}
+
+function addExpense() {
+    let name = prompt("Enter expense name:");
+
+    if (!name) {
+        return;
+    }
+
+    let amount = prompt("Enter amount:");
+
+    if (!amount || isNaN(amount)) {
+        alert("Please enter a valid amount.");
+        return;
+    }
+
+    let category = prompt("Enter category:");
+
+    if (!category) {
+        return;
+    }
+
+    let date = prompt("Enter date (DD/MM/YYYY):");
+
+    if (!date) {
+        return;
+    }
+
+    expenses.push({
+        name: name,
+        amount: Number(amount),
+        category: category,
+        date: date
+    });
+
+    updateTotal();
+    displayExpenses();
 }
 
 updateTotal();
