@@ -12,7 +12,9 @@ let expenses = [
         date: "12/08/2026"
     }
 ];
+];
 
+let monthlyBudget = 0;
 function updateTotal() {
     let total = 0;
 
@@ -21,6 +23,7 @@ function updateTotal() {
     });
 
     document.getElementById("total-expenses").textContent = total;
+document.getElementById("remaining-budget").textContent = monthlyBudget - total;
 }
 
 function displayExpenses() {
