@@ -33,7 +33,11 @@ function addExpense() {
 
     displayExpenses();
 }
+const total = expenses.reduce(function(sum, expense) {
+    return sum + expense.amount;
+}, 0);
 
+document.getElementById("totalExpenses").textContent = total;
 function displayExpenses() {
     const expenseList = document.getElementById("expenseList");
 
