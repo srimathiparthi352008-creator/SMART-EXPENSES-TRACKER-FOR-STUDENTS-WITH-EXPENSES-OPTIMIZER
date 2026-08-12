@@ -1,4 +1,5 @@
-let expenses = [
+
+    let expenses = JSON.parse(localStorage.getItem("expenses")) || [[
     {
         name: "college canteen",
         amount: 50,
@@ -76,7 +77,7 @@ function addExpense() {
         category: category,
         date: date
     });
-
+localStorage.setItem("expenses", JSON.stringify(expenses));
     updateTotal();
     displayExpenses();
 }
