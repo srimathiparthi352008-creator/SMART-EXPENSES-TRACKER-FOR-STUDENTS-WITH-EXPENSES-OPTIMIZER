@@ -1,69 +1,45 @@
-let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
-
-function addExpense() {
-    const expense = prompt("Enter expense name:");
-
-    if (!expense || expense.trim() === "") {
-        return;
+let expenses = [
+    {
+        name: "college canteen",
+        amount: 50,
+        category: "food",
+        date: "10/08/2026"
+    },
+    {
+        name: "bus",
+        amount: 30,
+        category: "transport",
+        date: "12/08/2026"
     }
+];
 
-    const amount = prompt("Enter amount:");
-
-    if (!amount || isNaN(amount) || Number(amount) <= 0) {
-        alert("Please enter a valid amount.");
-        return;
-    }
-
-    const category = prompt("Enter category:");
-
-    if (!category || category.trim() === "") {
-        return;
-    }
-
-    const newExpense = {
-        name: expense.trim(),
-        amount: Number(amount),
-        category: category.trim(),
-        date: new Date().toLocaleDateString()
-    };
-
-    expenses.push(newExpense);
-
-    localStorage.setItem("expenses", JSON.stringify(expenses));
-
-    displayExpenses();
-}
-const total = expenses.reduce(function(sum, expense) {
-    return sum + expense.amount;
-}, 0);
-
-document.getElementById("totalExpenses").textContent = total;
-function displayExpenses() {
-    const expenseList = document.getElementById("expenseList");
-
-    if (!expenseList) {
-        return;
-    }
-
-    expenseList.innerHTML = "";
-
-    if (expenses.length === 0) {
-        expenseList.innerHTML = "<p>No expenses added yet.</p>";
-        return;
-    }
+function updateTotal() {
+    let total = 0;
 
     expenses.forEach(function(expense) {
-        const item = document.createElement("div");
+        total += Number(expense.amount);
+    });
 
-        item.innerHTML =
-            "<p><strong>" + expense.name + "</strong></p>" +
-            "<p>Amount: ₹" + expense.amount + "</p>" +
-            "<p>Category: " + expense.category + "</p>" +
-            "<p>Date: " + expense.date + "</p>" +
-            "<hr>";
+    document.getElementById("total-expenses").textContent =
+        "Total Expenses: ₹" + total;
+}
 
-        expenseList.appendChild(item);
+function displayExpenses() {
+    let history = document.getElementById("expense-history");
+
+    history.innerHTML = "";
+
+    expenses.forEach(function(expense) {
+        history.innerHTML += `
+            <div class="expense-item">
+                <h3>${expense.name}</h3>
+                <p>Amount: ₹${expense.amount}</p>
+                <p>Category: ${expense.category}</p>
+                <p>Date: ${expense.date}</p>
+            </div>
+        `;
     });
 }
 
+updateTotal();
 displayExpenses();
