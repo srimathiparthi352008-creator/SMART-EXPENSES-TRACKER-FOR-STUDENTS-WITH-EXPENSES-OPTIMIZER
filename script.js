@@ -33,13 +33,14 @@ function displayExpenses() {
 
     history.innerHTML = "";
 
-    expenses.forEach(function(expense) {
+    expenses.forEach(function(expense, index)  {
         history.innerHTML += `
             <div class="expense-item">
                 <h3>${expense.name}</h3>
                 <p>Amount: ₹${expense.amount}</p>
                 <p>Category: ${expense.category}</p>
                 <p>Date: ${expense.date}</p>
+                <button onclick="deleteExpense(${index})">Delete</button>
             </div>
             <hr>
         `;
@@ -133,5 +134,15 @@ function updateOptimizer() {
     document.getElementById("optimizer-message").textContent = message;
 }
 
+
 updateOptimizer();
+function deleteExpense(index) {
+    expenses.splice(index, 1);
+
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+
+    updateTotal();
+    displayExpenses();
+    updateOptimizer();
+}
 
