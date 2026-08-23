@@ -1,5 +1,4 @@
-
-    let expenses = JSON.parse(localStorage.getItem("expenses")) || [[
+let expenses = JSON.parse(localStorage.getItem("expenses")) || [
     {
         name: "college canteen",
         amount: 50,
@@ -14,8 +13,8 @@
     }
 ];
 
+let monthlyBudget = Number(localStorage.getItem("monthlyBudget")) || 0;
 
-let monthlyBudget = 0;
 function updateTotal() {
     let total = 0;
 
@@ -24,7 +23,9 @@ function updateTotal() {
     });
 
     document.getElementById("total-expenses").textContent = total;
-document.getElementById("remaining-budget").textContent = monthlyBudget - total;
+    document.getElementById("monthly-budget").textContent = monthlyBudget;
+    document.getElementById("remaining-budget").textContent =
+        monthlyBudget - total;
 }
 
 function displayExpenses() {
@@ -48,38 +49,59 @@ function displayExpenses() {
 function addExpense() {
     let name = prompt("Enter expense name:");
 
-    if (!name) {
+    if (name === null || name.trim() === "") {
         return;
     }
 
     let amount = prompt("Enter amount:");
 
-    if (!amount || isNaN(amount)) {
+    if (amount === null || amount.trim() === "" || isNaN(amount)) {
         alert("Please enter a valid amount.");
         return;
     }
 
     let category = prompt("Enter category:");
 
-    if (!category) {
+    if (category === null || category.trim() === "") {
         return;
     }
 
     let date = prompt("Enter date (DD/MM/YYYY):");
 
-    if (!date) {
+    if (date === null || date.trim() === "") {
         return;
     }
 
     expenses.push({
-        name: name,
+        name: name.trim(),
         amount: Number(amount),
-        category: category,
-        date: date
+        category: category.trim(),
+        date: date.trim()
     });
-localStorage.setItem("expenses", JSON.stringify(expenses));
+
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+
     updateTotal();
     displayExpenses();
+
+    alert("Expense added successfully!");
+}
+
+function setBudget() {
+    let budget = prompt("Enter your monthly budget:");
+
+    if (budget === null || budget.trim() === "" || isNaN(budget)) {
+        alert("Please enter a valid budget.");
+        return;
+    }
+
+    monthlyBudget = Number(budget);
+
+    localStorage.setItem("monthlyBudget", monthlyBudget);
+
+    updateTotal();
+
+    alert("Monthly budget saved successfully!");
 }
 
 updateTotal();
