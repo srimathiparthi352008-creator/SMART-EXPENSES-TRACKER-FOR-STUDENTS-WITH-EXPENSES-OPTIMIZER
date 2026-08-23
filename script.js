@@ -106,3 +106,5 @@ function setBudget() {
 
 updateTotal();
 displayExpenses();
+document.getElementById("add-expense-button").onclick = addExpense;
+document.getElementById("set-budget-button").onclick = setBudget;
