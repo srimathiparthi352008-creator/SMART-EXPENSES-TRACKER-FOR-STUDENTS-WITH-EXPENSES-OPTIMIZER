@@ -107,4 +107,31 @@ function setBudget() {
 updateTotal();
 displayExpenses();
 document.getElementById("add-expense-button").onclick = addExpense;
+function updateOptimizer() {
+    let total = 0;
+
+    expenses.forEach(function(expense) {
+        total += Number(expense.amount);
+    });
+
+    let message = "";
+
+    if (monthlyBudget === 0) {
+        message = "Please set your monthly budget first.";
+    } else {
+        let percentage = (total / monthlyBudget) * 100;
+
+        if (percentage >= 80) {
+            message = "⚠️ You have used most of your budget. Try to reduce unnecessary spending.";
+        } else if (percentage >= 50) {
+            message = "💡 You have used half of your budget. Keep track of your spending.";
+        } else {
+            message = "✅ Your spending is under control. Keep saving!";
+        }
+    }
+
+    document.getElementById("optimizer-message").textContent = message;
+}
+
+updateOptimizer();
 
