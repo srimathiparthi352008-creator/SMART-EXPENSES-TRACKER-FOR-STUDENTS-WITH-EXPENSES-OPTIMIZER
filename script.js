@@ -22,13 +22,14 @@ function updateTotal() {
         total += Number(expense.amount);
     });
 
+    // Expense Summary
     document.getElementById("total-expenses").textContent = total;
     document.getElementById("monthly-budget").textContent = monthlyBudget;
     document.getElementById("remaining-budget").textContent =
         monthlyBudget - total;
 
     // Dashboard
-    document.getElementById("dashboard-total").textContent = total;
+    document.getElementById("dashboard-total").textContent = "₹" + total;
     document.getElementById("dashboard-count").textContent = expenses.length;
 
     let percentage = monthlyBudget > 0
@@ -37,6 +38,28 @@ function updateTotal() {
 
     document.getElementById("dashboard-percentage").textContent =
         percentage.toFixed(0);
+
+    // Highest spending category
+    let categoryTotals = {};
+
+    expenses.forEach(function(expense) {
+        let category = expense.category;
+        categoryTotals[category] =
+            (categoryTotals[category] || 0) + Number(expense.amount);
+    });
+
+    let highestCategory = "None";
+    let highestAmount = 0;
+
+    for (let category in categoryTotals) {
+        if (categoryTotals[category] > highestAmount) {
+            highestAmount = categoryTotals[category];
+            highestCategory = category;
+        }
+    }
+
+    document.getElementById("dashboard-category").textContent =
+        highestCategory;
 }
 function displayExpenses() {
     let history = document.getElementById("expense-history");
