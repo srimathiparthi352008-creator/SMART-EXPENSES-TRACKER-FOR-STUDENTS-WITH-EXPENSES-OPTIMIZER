@@ -22,7 +22,7 @@ function updateTotal() {
         total += Number(expense.amount);
     });
 
-    document.getElementById("dashboard-total").textContent = "₹" + total;
+    document.getElementById("dashboard-total").textContent = total;
     document.getElementById("dashboard-count").textContent = expenses.length;
 
     let percentage = monthlyBudget > 0
