@@ -89,7 +89,39 @@ function addExpense() {
 
     alert("Expense added successfully!");
 }
+function editExpense(index) {
+    let expense = expenses[index];
 
+    let name = prompt("Enter expense name:", expense.name);
+    if (name === null || name.trim() === "") return;
+
+    let amount = prompt("Enter amount:", expense.amount);
+    if (amount === null || amount.trim() === "" || isNaN(amount)) {
+        alert("Please enter a valid amount.");
+        return;
+    }
+
+    let category = prompt("Enter category:", expense.category);
+    if (category === null || category.trim() === "") return;
+
+    let date = prompt("Enter date (DD/MM/YYYY):", expense.date);
+    if (date === null || date.trim() === "") return;
+
+    expenses[index] = {
+        name: name.trim(),
+        amount: Number(amount),
+        category: category.trim(),
+        date: date.trim()
+    };
+
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+
+    updateTotal();
+    displayExpenses();
+    updateOptimizer();
+
+    alert("Expense updated successfully!");
+}
 function setBudget() {
     let budget = prompt("Enter your monthly budget:");
 
