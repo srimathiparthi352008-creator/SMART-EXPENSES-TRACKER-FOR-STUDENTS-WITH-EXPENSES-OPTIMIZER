@@ -38,6 +38,29 @@ function updateTotal() {
         monthlyBudget - total;
 
     // highest category code comes after this
+    // Highest Category
+let categoryTotals = {};
+
+expenses.forEach(function(expense) {
+    let category = expense.category;
+
+    if (category) {
+        categoryTotals[category] =
+            (categoryTotals[category] || 0) + Number(expense.amount);
+    }
+});
+
+let highestCategory = "None";
+let highestAmount = 0;
+
+for (let category in categoryTotals) {
+    if (categoryTotals[category] > highestAmount) {
+        highestAmount = categoryTotals[category];
+        highestCategory = category;
+    }
+}
+
+document.getElementById("dashboard-category").textContent = highestCategory;
         
 }
 function displayExpenses() {
