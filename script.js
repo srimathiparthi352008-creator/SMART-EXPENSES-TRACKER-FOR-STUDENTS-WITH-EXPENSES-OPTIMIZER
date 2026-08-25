@@ -40,6 +40,8 @@ function displayExpenses() {
                 <p>Amount: ₹${expense.amount}</p>
                 <p>Category: ${expense.category}</p>
                 <p>Date: ${expense.date}</p>
+                <button onclick="editExpense(${index})">Edit</button>
+
                 <button onclick="deleteExpense(${index})">Delete</button>
             </div>
             <hr>
