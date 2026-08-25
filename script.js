@@ -17,7 +17,15 @@ let monthlyBudget = Number(localStorage.getItem("monthlyBudget")) || 0;
 
 function updateTotal() {
     let total = 0;
+document.getElementById("dashboard-total").textContent = total;
+document.getElementById("dashboard-count").textContent = expenses.length;
 
+let percentage = monthlyBudget > 0
+    ? (total / monthlyBudget) * 100
+    : 0;
+
+document.getElementById("dashboard-percentage").textContent =
+    percentage.toFixed(0) + "%";
     expenses.forEach(function(expense) {
         total += Number(expense.amount);
     });
