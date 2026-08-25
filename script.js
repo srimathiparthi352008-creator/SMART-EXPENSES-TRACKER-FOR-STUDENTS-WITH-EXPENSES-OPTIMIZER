@@ -191,4 +191,6 @@ function deleteExpense(index) {
     displayExpenses();
     updateOptimizer();
 }
+updateTotal();
+displayExpenses();
 
