@@ -238,3 +238,4 @@ function deleteExpense(index) {
 updateTotal();
 displayExpenses();
 
+document.getElementById("add-expense-button").onclick = addExpense;
