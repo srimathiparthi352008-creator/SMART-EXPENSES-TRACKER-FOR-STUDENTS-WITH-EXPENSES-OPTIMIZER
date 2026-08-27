@@ -197,7 +197,7 @@ function setBudget() {
 
 updateTotal();
 displayExpenses();
-document.getElementById("add-expense-button").onclick = addExpense;
+
 function updateOptimizer() {
     let total = 0;
 
@@ -237,5 +237,6 @@ function deleteExpense(index) {
 }
 updateTotal();
 displayExpenses();
+updateOptimizer();
 
-document.getElementById("add-expense-button").onclick = addExpense;
+document.getElementById("add-expense-button").addEventListener("click", addExpense);
