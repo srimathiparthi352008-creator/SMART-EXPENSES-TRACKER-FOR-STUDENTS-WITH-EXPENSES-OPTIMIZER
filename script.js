@@ -81,62 +81,7 @@ for (let category in categoryTotals) {
 
     chart.appendChild(bar);
 }
-    // Pie Chart
-let pieChart = document.getElementById("pie-chart");
-let pieLegend = document.getElementById("pie-legend");
-
-let pieColors = [
-    "#2563eb",
-    "#22c55e",
-    "#f59e0b",
-    "#ef4444",
-    "#8b5cf6",
-    "#14b8a6"
-];
-
-let pieParts = [];
-let start = 0;
-let colorIndex = 0;
-
-for (let category in categoryTotals) {
-    let amount = categoryTotals[category];
-    let percentage = total > 0 ? (amount / total) * 100 : 0;
-    let end = start + percentage;
-
-    pieParts.push(
-        pieColors[colorIndex % pieColors.length] +
-        " " + start + "% " + end + "%"
-    );
-
-    start = end;
-    colorIndex++;
-}
-
-if (total > 0) {
-    pieChart.style.width = "220px";
-    pieChart.style.height = "220px";
-    pieChart.style.borderRadius = "50%";
-    pieChart.style.margin = "20px auto";
-    pieChart.style.background =
-        "conic-gradient(" + pieParts.join(", ") + ")";
-}
-
-pieLegend.innerHTML = "";
-
-colorIndex = 0;
-
-for (let category in categoryTotals) {
-    let amount = categoryTotals[category];
-    let percentage = total > 0
-        ? ((amount / total) * 100).toFixed(0)
-        : 0;
-
-    pieLegend.innerHTML +=
-        "<p>" + category + ": ₹" +
-        amount + " (" + percentage + "%)</p>";
-
-    colorIndex++;
-}
+    
 function displayExpenses() {
     let history = document.getElementById("expense-history");
 
