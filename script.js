@@ -82,6 +82,46 @@ for (let category in categoryTotals) {
     chart.appendChild(bar);
 
     }
+    // Pie Chart
+let pieChart = document.getElementById("pie-chart");
+let pieLegend = document.getElementById("pie-legend");
+
+let pieParts = [];
+let start = 0;
+
+for (let category in categoryTotals) {
+    let amount = categoryTotals[category];
+    let percentage = total > 0 ? (amount / total) * 100 : 0;
+    let end = start + percentage;
+
+    pieParts.push(
+        start + "% " + end + "% transparent"
+    );
+
+    start = end;
+}
+
+if (total > 0) {
+    pieChart.style.width = "220px";
+    pieChart.style.height = "220px";
+    pieChart.style.borderRadius = "50%";
+    pieChart.style.margin = "20px auto";
+    pieChart.style.background =
+        "conic-gradient(" + pieParts.join(", ") + ")";
+}
+
+pieLegend.innerHTML = "";
+
+for (let category in categoryTotals) {
+    let amount = categoryTotals[category];
+    let percentage = total > 0
+        ? ((amount / total) * 100).toFixed(0)
+        : 0;
+
+    pieLegend.innerHTML +=
+        "<p><strong>" + category + "</strong>: ₹" +
+        amount + " (" + percentage + "%)</p>";
+}
 
 function displayExpenses() {
     let history = document.getElementById("expense-history");
