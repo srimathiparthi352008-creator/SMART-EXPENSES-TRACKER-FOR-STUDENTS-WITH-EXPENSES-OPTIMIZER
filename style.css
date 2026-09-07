@@ -107,3 +107,53 @@ button:hover {
         grid-template-columns: 1fr;
     }
 }
+/* Dashboard App Layout Fix */
+
+.dashboard {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+    margin: 20px 0 !important;
+}
+
+.dashboard-card {
+    background: white !important;
+    padding: 20px !important;
+    border-radius: 15px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12) !important;
+    text-align: center !important;
+}
+
+.dashboard-card h3 {
+    margin: 0 0 10px 0 !important;
+    font-size: 18px !important;
+}
+
+.dashboard-card p {
+    margin: 0 !important;
+    font-size: 25px !important;
+    font-weight: bold !important;
+}
+
+.chart-container {
+    background: white !important;
+    padding: 20px !important;
+    margin: 20px 0 !important;
+    border-radius: 15px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12) !important;
+}
+
+.chart-container h3 {
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+}
+
+#category-chart {
+    width: 100% !important;
+}
+
+@media (max-width: 600px) {
+    .dashboard {
+        grid-template-columns: 1fr !important;
+    }
+}
