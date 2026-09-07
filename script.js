@@ -82,7 +82,7 @@ for (let category in categoryTotals) {
     chart.appendChild(bar);
 
     }
-}
+
 function displayExpenses() {
     let history = document.getElementById("expense-history");
 
