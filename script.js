@@ -62,23 +62,25 @@ for (let category in categoryTotals) {
 document.getElementById("dashboard-category").textContent = highestCategory;
     // Highest Category
     // Category Bar Chart
-    let chart = document.getElementById("category-chart");
-    chart.innerHTML = "";
+let chart = document.getElementById("category-chart");
+chart.innerHTML = "";
 
-    for (let category in categoryTotals) {
-        let amount = categoryTotals[category];
+for (let category in categoryTotals) {
+    let amount = categoryTotals[category];
 
-        let bar = document.createElement("div");
-        bar.style.marginBottom = "10px";
+    let bar = document.createElement("div");
 
-        bar.innerHTML =
-            "<strong>" + category + "</strong> ₹" + amount +
-            "<div style='background:#ddd; height:20px; margin-top:5px;'>" +
-            "<div style='background:#4CAF50; height:20px; width:" +
-            Math.min(amount / total * 100, 100) + "%;'></div>" +
-            "</div>";
+    bar.innerHTML = `
+        <div style="font-weight:bold; margin-bottom:5px;">
+            ${category} - ₹${amount}
+        </div>
+        <div style="width:100%; background:#ddd; height:25px; border-radius:5px; overflow:hidden; margin-bottom:15px;">
+            <div style="width:${total > 0 ? (amount / total) * 100 : 0}%; background:#2563eb; height:25px;"></div>
+        </div>
+    `;
 
-        chart.appendChild(bar);
+    chart.appendChild(bar);
+
     }
 }
 function displayExpenses() {
