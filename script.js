@@ -55,12 +55,31 @@ for (let category in categoryTotals) {
     if (categoryTotals[category] > highestAmount) {
         highestAmount = categoryTotals[category];
         highestCategory = category;
+        
     }
 }
 
 document.getElementById("dashboard-category").textContent = highestCategory;
     // Highest Category
+    // Category Bar Chart
+    let chart = document.getElementById("category-chart");
+    chart.innerHTML = "";
 
+    for (let category in categoryTotals) {
+        let amount = categoryTotals[category];
+
+        let bar = document.createElement("div");
+        bar.style.marginBottom = "10px";
+
+        bar.innerHTML =
+            "<strong>" + category + "</strong> ₹" + amount +
+            "<div style='background:#ddd; height:20px; margin-top:5px;'>" +
+            "<div style='background:#4CAF50; height:20px; width:" +
+            Math.min(amount / total * 100, 100) + "%;'></div>" +
+            "</div>";
+
+        chart.appendChild(bar);
+    }
 }
 function displayExpenses() {
     let history = document.getElementById("expense-history");
